@@ -11,7 +11,8 @@
 #'    \item \code{method="RobsonRegier2"}: The special case for k=2 estimator shown by Robson and Regier (1968).
 #'    \item \code{method="Moran"}: The likelihood method of Moran (1951) as implemented by Schnute (1983).
 #'    \item \code{method="Schnute"}: The likelihood method of Schnute (1983) for the model that has a different probability of capture for the first sample but a constant probability of capture for all ensuing samples..
-#'  }
+#'    \item \code{method="Burnham"}:
+#'   }
 #'
 #' Confidence intervals for the first five methods are computed using standard large-sample normal distribution theory. Note that the confidence intervals for the 2- and 3-pass special cases are only approximately correct if the estimated population size is greater than 200. If the estimated population size is between 50 and 200 then a 95\% CI behaves more like a 90\% CI.
 #' 
@@ -213,7 +214,8 @@ removal <- function(catch,
     Seber2=        { tmp <- iSeber2(catch,conf.level) },        
     RobsonRegier2= { tmp <- iRobsonRegier2(catch,conf.level) },
     Moran=         { tmp <- iMoran(catch,conf.level,Tmult) },
-    Schnute=       { tmp <- iSchnute(catch,conf.level,Tmult) }
+    Schnute=       { tmp <- iSchnute(catch,conf.level,Tmult) },
+    Burnham=       { tmp <- iBurnham(catch,conf.level) }
   )
   if (just.ests) { tmp <- tmp$est }
   else {
@@ -603,6 +605,10 @@ iRobsonRegier2 <- function(catch,conf.level) {
   list(est=tmp,catch=catch,lbl="Robson & Regier (1968) 2-Pass Removal Method")
 }
 
+#=============================================================
+# INTERNAL -- Calculate Burnham
+#=============================================================
+iBurnham <- function(catch, conf){}
 
 #' @rdname removal
 #' @export
